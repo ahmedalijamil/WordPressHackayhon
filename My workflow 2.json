@@ -1,0 +1,422 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "93de8d31-5321-44ca-86ed-5db097f25116",
+      "name": "When chat message received",
+      "webhookId": "575de024-1bf9-443f-87e9-ddf33d06fb1f"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "70819625-4db0-40cd-91d2-7ccac24d11bc",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        80,
+        208
+      ],
+      "id": "f92652fa-7ad5-4196-a1e2-f994a9d9856b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "DSM7cqODfyizotcB",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 2
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        208
+      ],
+      "id": "180651b5-9418-4bb2-a50c-f0702b93cef4",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1HZnURlRpN3w8cRFTjq5mJcqGC6HLIy0unSEhADmA1HU",
+          "mode": "list",
+          "cachedResultName": "Untitled spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HZnURlRpN3w8cRFTjq5mJcqGC6HLIy0unSEhADmA1HU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 90497884,
+          "mode": "list",
+          "cachedResultName": "Medicine",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HZnURlRpN3w8cRFTjq5mJcqGC6HLIy0unSEhADmA1HU/edit#gid=90497884"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Patient Number",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', ``, 'string') }}"
+            },
+            {
+              "lookupColumn": "Patient Name",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values1_Value', ``, 'string') }}"
+            }
+          ]
+        },
+        "combineFilters": "OR",
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        432,
+        160
+      ],
+      "id": "2602da3f-c4d7-4520-8ec4-80bbb658d2c4",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6eJfoMgYxO2U8kbO",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1HZnURlRpN3w8cRFTjq5mJcqGC6HLIy0unSEhADmA1HU",
+          "mode": "list",
+          "cachedResultName": "Untitled spreadsheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HZnURlRpN3w8cRFTjq5mJcqGC6HLIy0unSEhADmA1HU/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 90497884,
+          "mode": "list",
+          "cachedResultName": "Medicine",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1HZnURlRpN3w8cRFTjq5mJcqGC6HLIy0unSEhADmA1HU/edit#gid=90497884"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Patient Number": "={{ $fromAI('Patient_Number__using_to_match_', ``, 'string') }}",
+            "Medicine Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Medicine_Name', ``, 'string') }}",
+            "Composition": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Composition', ``, 'string') }}",
+            "Uses": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Uses', ``, 'string') }}",
+            "Side_effects": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Side_effects', ``, 'string') }}",
+            "Image URL": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Image_URL', ``, 'string') }}",
+            "Manufacturer": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Manufacturer', ``, 'string') }}",
+            "Excellent Review %": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Excellent_Review__', ``, 'string') }}",
+            "Average Review %": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Average_Review__', ``, 'string') }}",
+            "Poor Review %": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Poor_Review__', ``, 'string') }}",
+            "Dosage": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Dosage', ``, 'string') }}",
+            "Frequency": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Frequency', ``, 'string') }}",
+            "Start_Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start_Date', ``, 'string') }}",
+            "End_Date": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End_Date', ``, 'string') }}",
+            "Time_of_Day": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Time_of_Day', ``, 'string') }}",
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Patient Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Patient_Name', ``, 'string') }}",
+            "Disease": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Disease', ``, 'string') }}",
+            "Stock": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Stock', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Patient Number"
+          ],
+          "schema": [
+            {
+              "id": "Patient Number",
+              "displayName": "Patient Number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Medicine Name",
+              "displayName": "Medicine Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Composition",
+              "displayName": "Composition",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Uses",
+              "displayName": "Uses",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Side_effects",
+              "displayName": "Side_effects",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image URL",
+              "displayName": "Image URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Manufacturer",
+              "displayName": "Manufacturer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Excellent Review %",
+              "displayName": "Excellent Review %",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Average Review %",
+              "displayName": "Average Review %",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Poor Review %",
+              "displayName": "Poor Review %",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Dosage",
+              "displayName": "Dosage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Frequency",
+              "displayName": "Frequency",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Start_Date",
+              "displayName": "Start_Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "End_Date",
+              "displayName": "End_Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Time_of_Day",
+              "displayName": "Time_of_Day",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Patient Name",
+              "displayName": "Patient Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Disease",
+              "displayName": "Disease",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Stock",
+              "displayName": "Stock",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        416,
+        256
+      ],
+      "id": "b9300b75-d92e-4cc1-a8f1-a138be3affeb",
+      "name": "Append or update row in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "6eJfoMgYxO2U8kbO",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "7b777333-1d92-4609-8e2d-d8326ca99773",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "66bbf02cf16843bdeffbbd07822252d4c5dfed055fbdcfc6e3124dd193132073"
+  },
+  "id": "cuo4RjN5hwdCJ6KV",
+  "tags": []
+}
