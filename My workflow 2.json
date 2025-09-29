@@ -1,5 +1,5 @@
 {
-  "name": "My workflow 2",
+  "name": "Medicine Tracker",
   "nodes": [
     {
       "parameters": {
@@ -408,11 +408,13 @@
       ]
     }
   },
-  "active": false,
+  "active": true,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
   },
-  "versionId": "7b777333-1d92-4609-8e2d-d8326ca99773",
+  "versionId": "f577ad00-45ae-4622-ba09-762af3f0a341",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "66bbf02cf16843bdeffbbd07822252d4c5dfed055fbdcfc6e3124dd193132073"
